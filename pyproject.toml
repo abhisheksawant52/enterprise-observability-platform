@@ -1,0 +1,67 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "observability-platform"
+version = "0.1.0"
+description = "Enterprise observability platform: metrics, logs, and traces via OpenTelemetry, Prometheus, Loki, Tempo, and Grafana"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Abhishek Sawant" }]
+keywords = [
+    "observability",
+    "opentelemetry",
+    "prometheus",
+    "loki",
+    "tempo",
+    "grafana",
+    "metrics",
+    "tracing",
+    "logging",
+]
+dependencies = [
+    "fastapi>=0.110",
+    "uvicorn>=0.29",
+    "pydantic>=2.6",
+    "pydantic-settings>=2.2",
+    "opentelemetry-sdk>=1.24",
+    "opentelemetry-exporter-otlp>=1.24",
+    "prometheus-client>=0.20",
+    "structlog>=24.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.5",
+    "black>=24.0",
+    "pre-commit>=3.7",
+    "httpx>=0.27",
+]
+
+[project.scripts]
+obs-platform = "obsplatform.main:run"
+
+[project.urls]
+Homepage = "https://github.com/abhisheksawant52/enterprise-observability-platform"
+Issues = "https://github.com/abhisheksawant52/enterprise-observability-platform/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "observability-platform.fullname" . }}-config
+  labels:
+    {{- include "observability-platform.labels" . | nindent 4 }}
+data:
+  OBS_SERVICE_NAME: {{ .Values.config.serviceName | quote }}
+  OBS_ENV: {{ .Values.config.env | quote }}
+  OBS_LOG_LEVEL: {{ .Values.config.logLevel | quote }}
+  OBS_PORT: {{ .Values.service.port | quote }}
+  OBS_OTLP_ENDPOINT: {{ .Values.config.otlpEndpoint | quote }}
+  OBS_PROMETHEUS_PORT: {{ .Values.config.prometheusPort | quote }}
+  OBS_LOKI_ENDPOINT: {{ .Values.config.lokiEndpoint | quote }}
+  OBS_TEMPO_ENDPOINT: {{ .Values.config.tempoEndpoint | quote }}

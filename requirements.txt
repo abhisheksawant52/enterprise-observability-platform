@@ -1,0 +1,10 @@
+# Runtime dependencies for the observability platform service.
+# Development and test tooling lives in the [dev] extra of pyproject.toml.
+fastapi>=0.110
+uvicorn>=0.29
+pydantic>=2.6
+pydantic-settings>=2.2
+opentelemetry-sdk>=1.24
+opentelemetry-exporter-otlp>=1.24
+prometheus-client>=0.20
+structlog>=24.1

@@ -1,0 +1,44 @@
+replicaCount: 2
+
+image:
+  repository: ghcr.io/abhisheksawant52/enterprise-observability-platform
+  tag: ""            # defaults to .Chart.AppVersion when empty
+  pullPolicy: IfNotPresent
+
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  name: ""
+
+service:
+  type: ClusterIP
+  port: 8000
+
+# Environment variables consumed by the service (OBS_ prefix).
+config:
+  serviceName: observability-platform
+  env: prod
+  logLevel: INFO
+  otlpEndpoint: http://otel-collector:4317
+  prometheusPort: 9464
+  lokiEndpoint: http://loki:3100/loki/api/v1/push
+  tempoEndpoint: http://tempo:4317
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
+
+podAnnotations:
+  prometheus.io/scrape: "true"
+  prometheus.io/port: "8000"
+  prometheus.io/path: /metrics
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
