@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 # ---- Builder ----------------------------------------------------------------
-FROM python:3.12-slim AS builder
+FROM python:3.14-slim AS builder
 
 WORKDIR /app
 
@@ -15,7 +15,7 @@ RUN python -m pip install --upgrade pip build \
     && python -m build --wheel --outdir /dist
 
 # ---- Runtime ----------------------------------------------------------------
-FROM python:3.12-slim AS runtime
+FROM python:3.14-slim AS runtime
 
 WORKDIR /app
 
